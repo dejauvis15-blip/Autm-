@@ -22,18 +22,19 @@ h1{
 .card {
     background: var(--ink-800);
     border: 1px solid var(--ink-700);
-    border-radius: 20px;
-    padding: 16px;
+    border-radius: 28px;
+    padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 18px 40px -6px rgba(0, 0, 0, 0.5);
 }
 
 .card img {
     width: 76px; 
     height: 76px;
-    border-radius: 12px;
+    border-radius: 20px;
+    object-fit: cover;
 }
 
 .song {
@@ -52,8 +53,8 @@ h1{
     background: var(--mist-100);
     color: var(--ink-900);
     font-size: 11px;
-    font-weight:800;
-    padding:4px 10px;
+    font-weight: 700;
+    padding:5px 12px;
     border-radius: 999px;
 }
 .card-header,
@@ -75,8 +76,13 @@ h1{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
+  color: var(--mist-100);
+}
+.badge.inactive{
+  background: var(--ink-700);
+  color: var(--mist-300);
 }
 
 .friend {
@@ -91,4 +97,19 @@ h1{
   
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+}
+.progress {
+  height: 4px;
+  background: var(--ink-700);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--mist-100);
+}
+
+.progress-fill.inactive {
+  background:var(--ink-500);
 }
