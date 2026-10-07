@@ -85,12 +85,27 @@ switched to this because it's easier to learn on.
   - Learned: `querySelector(All)`, `addEventListener`, functions, `if`/`return`,
     template literals, arrays (`push`, `indexOf`, `splice`, `forEach`), JSON
 - [ ] Optional challenges: capitalize added names; say "friend" (not "friends") for 1
-- [ ] **Before Week 3:** make a Last.fm account, connect Spotify (Settings →
-      Applications), play a few songs, get a free API key at
-      last.fm/api/account/create. Keep the key private: don't paste it in chat or
-      commit it to GitHub.
-- [ ] **Week 3:** use `fetch()` to show real "now playing" songs from Last.fm, and keep
-      the API key out of GitHub with a `.gitignore` file
+- [x] **Week 3: real Last.fm data** (`config.js` holds the API key and is in `.gitignore`)
+  - Friend cards show the real current song, album art, profile picture, and an
+    "Active" or "Last active X min ago" badge; they refresh every 30 seconds
+  - Recently played merges all friends' finished songs, newest first
+  - Your week: real plays, top artist, track and album for the last 7 days
+  - Search box filters friend cards; two "+ Add friend" buttons share one class
+  - Learned: `fetch`, `async`/`await`, JSON, `?.`, `||` fallbacks, `classList`,
+    `dataset`, `setInterval`, objects, `for...of`, `sort`, `slice`, `Date.now()`
+- [ ] **Week 4: My Stats page** (`stats.html` + `stats.js`, Figma screen 05)
+  - [x] 4.1 Page created and linked from the sidebar and "See my stats".
+        Shared code lives in `lastfm.js` (`MY_USERNAME`, `callLastfm`, `showAvatar`,
+        `realImage`), loaded by both pages before their own script
+  - [x] 4.2 Real top 5 artists, tracks and albums; 7 days / 1 month / 1 year tabs work.
+        Learned: `.map()`, ternary `? :`, `Promise.all`, `encodeURIComponent`,
+        objects as lookup tables, `:first-child`, `text-overflow: ellipsis`
+  - [ ] **4.3 (next):** overview row: total plays, daily plays bar chart, side tiles
+- [ ] Later: artist photos. Last.fm has no artist photos (only a gray star
+      placeholder), and no art at all for small artists like Lil Dre6o and Loe Shimmy.
+      Spotify's API has them but needs a secret key on a server, so do it in Next.js
+      (Week 5+). For now, artists without art show a letter circle.
+- [ ] Ask a few friends to make Last.fm accounts, connect Spotify, and get added
 
 ## Lessons from mistakes
 
@@ -102,6 +117,12 @@ switched to this because it's easier to learn on.
 - Everything visible goes between `<body>` and `</body>`. Nothing goes after `</body>`.
 - In JavaScript, order matters: count or read things *after* they're added to the page.
 - Turn on File → Auto Save in VS Code. Unsaved files were the cause of "nothing changed".
+- When part of the page disappears, open the Console (F12). One JavaScript error stops
+  everything after it. A *syntax* error (like a stray `:`) stops the whole file.
+- When moving code between files, cut the *whole* function, paste it, and save both
+  files. A half-moved function left `data is not defined` behind.
+- HTML that JavaScript fills in still needs its container (`<ul class="recent-list">`)
+  and its `id`s. `querySelector` returns `null` if the element isn't there.
 
 ## Learning tips
 
