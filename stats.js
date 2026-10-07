@@ -61,8 +61,7 @@ async function showTopLists(period) {
       artFromHistory[artistName] = image;
     }
   });
-  console.log("artistImages:", artistImages);
-  console.log("artFromHistory:", artFromHistory);
+  
    renderTopList(topArtistsList, artists.topartists.artist.map(function (artist, index) {
     return { name: artist.name, subtitle: "", plays: artist.playcount,image: artistImages[index] || artFromHistory[artist.name] || ""  };
   })); 
