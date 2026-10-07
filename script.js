@@ -1,4 +1,5 @@
-const addFriendButton = document.querySelector("#add-friend-btn");
+const addFriendButtons = document.querySelectorAll(".add-friend-trigger");
+const searchInput = document.querySelector("#search-input");
 
 const friends = JSON.parse(localStorage.getItem("friends")) || [];
 const MY_USERNAME = "Jauvisss";
@@ -58,8 +59,23 @@ friends.forEach(function (name) {
 
 updateFriendCount(); 
 
-addFriendButton.addEventListener("click", function () {
-  dialog.showModal();
+addFriendButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    dialog.showModal();
+  });
+});
+searchInput.addEventListener("input", function () {
+  const query = searchInput.value.trim().toLowerCase();
+
+  feed.querySelectorAll(".card").forEach(function (card) {
+    const username = card.dataset.username.toLowerCase();
+
+    if (username.includes(query)) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
 });
 
 closeButton.addEventListener("click", function () {
@@ -229,6 +245,7 @@ async function showRecentlyPlayed() {
     `;
 
     recentList.appendChild(row);
+    showAvatar(row.querySelector(".avatar"), play.username);
   });
 }
 showRecentlyPlayed();
