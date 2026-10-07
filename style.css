@@ -361,6 +361,9 @@ h2 {
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .me {
