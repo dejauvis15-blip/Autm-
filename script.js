@@ -110,12 +110,6 @@ function updateFriendCount() {
   friendCount.textContent = `${listening} of ${total} friends are listening right now`;
 }
 
-  const picture = data.user.image[2]["#text"];
-
-  if (picture) {
-    avatar.innerHTML = `<img src="${picture}" alt="">`;
-  }
-
 async function getRecentTracks(username) {
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=5`;
 
