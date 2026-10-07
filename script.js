@@ -37,6 +37,7 @@ function addFriendCard(name) {
     card.remove();
   });
   feed.appendChild(card);
+  showNowPlaying(card, name);
 }
 
 function saveFriends() {
@@ -77,9 +78,49 @@ form.addEventListener("submit", function (event) {
   form.reset();
   dialog.close();
 });
+
 function updateFriendCount() {
   const total = feed.querySelectorAll(".card").length;
   const listening = feed.querySelectorAll(".badge:not(.inactive)").length;
 
   friendCount.textContent = `${listening} of ${total} friends are listening right now`;
+}
+
+
+async function getNowPlaying(username) {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (data.error) {
+    return null;
+  }
+
+  return data.recenttracks.track[0];
+}
+async function showNowPlaying(card, username) {
+  const track = await getNowPlaying(username);
+
+  if (!track) {
+    return;
+  }
+
+  card.querySelector(".card-body").innerHTML = `
+    <img src="${track.image[2]["#text"]}" alt="${track.name} cover art">
+    <div class="card-text">
+      <p class="song">${track.name}</p>
+      <p class="artist">${track.artist["#text"]}</p>
+    </div>
+  `;
+
+  const isPlaying = track["@attr"]?.nowplaying === "true";
+
+  if (isPlaying) {
+    const badge = card.querySelector(".badge");
+    badge.textContent = "Active";
+    badge.classList.remove("inactive");
+  }
+
+  updateFriendCount();
 }
