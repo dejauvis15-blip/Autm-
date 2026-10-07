@@ -50,10 +50,21 @@ async function showTopLists(period) {
   const albums = await callLastfm(`method=user.gettopalbums&user=${MY_USERNAME}&period=${period}&limit=5`);
   const artistImages = await Promise.all(artists.topartists.artist.map(getArtistImage));
   const trackImages = await Promise.all(tracks.toptracks.track.map(getTrackImage));
+  const recent = await callLastfm(`method=user.getrecenttracks&user=${MY_USERNAME}&limit=200`);
+  const artFromHistory = {};
+
+  recent.recenttracks.track.forEach(function (track) {
+    const artistName = track.artist["#text"];
+    const image = track.image[2]["#text"];
+
+    if (image && !artFromHistory[artistName]) {
+      artFromHistory[artistName] = image;
+    }
+  });
 
    renderTopList(topArtistsList, artists.topartists.artist.map(function (artist, index) {
-    return { name: artist.name, subtitle: "", plays: artist.playcount, image: artistImages[index] };
-  }));
+    return { name: artist.name, subtitle: "", plays: artist.playcount,image: artistImages[index] || artFromHistory[artist.name] || ""  };
+  }));: 
 
   renderTopList(topTracksList, tracks.toptracks.track.map(function (track, index) {
     return { name: track.name, subtitle: track.artist.name, plays: track.playcount, image: trackImages[index] };
