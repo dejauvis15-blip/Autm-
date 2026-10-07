@@ -2,7 +2,7 @@ const addFriendButtons = document.querySelectorAll(".add-friend-trigger");
 const searchInput = document.querySelector("#search-input");
 
 const friends = JSON.parse(localStorage.getItem("friends")) || [];
-const MY_USERNAME = "Jauvisss";
+
 const feed = document.querySelector(".feed");
 const dialog = document.querySelector("#add-friend-dialog");
 const form = document.querySelector("#add-friend-form");
@@ -110,25 +110,12 @@ function updateFriendCount() {
   friendCount.textContent = `${listening} of ${total} friends are listening right now`;
 }
 
-
-async function callLastfm(params) {
-  const url = `https://ws.audioscrobbler.com/2.0/?${params}&api_key=${LASTFM_API_KEY}&format=json`;
-  const response = await fetch(url);
-  return await response.json();
-}
-async function showAvatar(avatar, username) {
-  const data = await callLastfm(`method=user.getinfo&user=${username}`);
-
-  if (data.error) {
-    return;
-  }
-
   const picture = data.user.image[2]["#text"];
 
   if (picture) {
     avatar.innerHTML = `<img src="${picture}" alt="">`;
   }
-}
+
 async function getRecentTracks(username) {
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=5`;
 

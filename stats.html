@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>autm</title>
+    <title>My Stats · autm</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="config.js" defer></script>
     <script src="lastfm.js" defer></script>
-    <script src="script.js" defer></script>
+    <script src="stats.js" defer></script>
 </head>
 <body>
   <div class="app">
@@ -22,16 +22,15 @@
     </a>
 
     <nav class="nav">
-      <a href="#" class="nav-link active"><span class="nav-icon"></span>Feed</a>
-      <a href="#" class="nav-link"><span class="nav-icon"></span>My Stats</a>
+      <a href="index.html" class="nav-link"><span class="nav-icon"></span>Feed</a>
+      <a href="stats.html" class="nav-link active"><span class="nav-icon"></span>My Stats</a>
       <a href="#" class="nav-link"><span class="nav-icon"></span>Ranks</a>
       <a href="#" class="nav-link"><span class="nav-icon"></span>Friends</a>
       <a href="#" class="nav-link"><span class="nav-icon"></span>Settings</a>
       <a href="#" class="nav-link"><span class="nav-icon"></span>About</a>
     </nav>
 
-     <button class="button-primary add-friend-trigger">+ Add friend</button>  
-
+     <a href="index.html" class="button-primary">+ Add friend</a>
     <div class="me">
       <span class="avatar large" id="my-avatar">J</span>
       <div>
@@ -43,17 +42,38 @@
     <main class="main">
      <header class="page-header">
   <div>
-    <h1>Hey, Jauvis</h1>
-    <p class="subtitle" id="friend-count">2 friends are listening right now</p>
+    <h1>My Stats</h1>
+    <p class="subtitle">@Jauvisss on Last.fm</p>
   </div>
-  <div class="header-actions">
-    <label class="search">
-      <span class="search-icon"></span>
-      <input type="search" id="search-input" placeholder="Search friends" autocomplete="off">
-    </label>
-    <button class="button-primary add-friend-trigger">+ Add friend</button>
+  <div class="tabs">
+    <button class="tab active" data-period="7day">7 days</button>
+    <button class="tab" data-period="1month">1 month</button>
+    <button class="tab" data-period="12month">1 year</button>
   </div>
 </header>
+
+<div class="top-lists">
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top artists</h2>
+    </div>
+    <ol class="top-rows" id="top-artists"></ol>
+  </section>
+
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top tracks</h2>
+    </div>
+    <ol class="top-rows" id="top-tracks"></ol>
+  </section>
+
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top albums</h2>
+    </div>
+    <ol class="top-rows" id="top-albums"></ol>
+  </section>
+</div>
 
      <div class="section-header">
       <h2>Listening now</h2>
@@ -89,31 +109,11 @@
     <strong>21 hr</strong>
   </div>
 
-  <a href="stats.html" class="week-button">See my stats</a>
+  <a href="#" class="week-button">See my stats</a>
 </aside>
 </div>
  </main>
 </div>
-<dialog id="add-friend-dialog" class="modal">
-  <form id="add-friend-form">
-    <div class="modal-header">
-      <div>
-        <h2 class="modal-title">Add a friend</h2>
-        <p class="modal-subtitle">Type their Last.fm username</p>
-      </div>
-      <button type="button" class="modal-close" id="close-dialog-btn" aria-label="Close">✕</button>
-    </div>
 
-    <label class="input-wrap">
-      <span class="input-at">@</span>
-      <input type="text" id="friend-name-input" placeholder="username" autocomplete="off" required>
-    </label>
-
-    <div class="modal-actions">
-      <button type="button" class="button-secondary" id="cancel-dialog-btn">Cancel</button>
-      <button type="submit" class="button-primary">Add friend</button>
-    </div>
-  </form>
-</dialog>
 </body>
 </html>
