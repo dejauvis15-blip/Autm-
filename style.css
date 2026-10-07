@@ -100,21 +100,7 @@ h1{
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
-.progress {
-  height: 4px;
-  background: var(--ink-700);
-  border-radius: 2px;
-  overflow: hidden;
-}
 
-.progress-fill {
-  height: 100%;
-  background: var(--mist-100);
-}
-
-.progress-fill.inactive {
-  background:var(--ink-500);
-}
 .main{
   padding: 36px;
 }
