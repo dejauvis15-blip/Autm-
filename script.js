@@ -1,12 +1,12 @@
 const addFriendButton = document.querySelector("#add-friend-btn");
 const feed = document.querySelector(".feed");
+const dialog = document.querySelector("#add-friend-dialog");
+const form = document.querySelector("#add-friend-form");
+const nameInput = document.querySelector("#friend-name-input");
+const closeButton = document.querySelector("#close-dialog-btn");
+const cancelButton = document.querySelector("#cancel-dialog-btn");
 
-addFriendButton.addEventListener("click", function () {
-  const name = prompt("What's your friend's name?");
-
-  if (!name) {
-    return;
-  }
+function addFriendCard(name) {
   const card = document.createElement("article");
   card.className = "card";
 
@@ -19,10 +19,36 @@ addFriendButton.addEventListener("click", function () {
     <div class="card-body">
       <div class="card-text">
         <p class="song">No song yet</p>
-        <p class="artist">Connects to Last.fm in Week 3</p>
+        <p class="artist">Quiet right now</p>
       </div>
     </div>
   `;
 
   feed.appendChild(card);
+}
+
+addFriendButton.addEventListener("click", function () {
+  dialog.showModal();
+});
+
+closeButton.addEventListener("click", function () {
+  dialog.close();
+});
+
+cancelButton.addEventListener("click", function () {
+  dialog.close();
+});
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const name = nameInput.value.trim();
+
+  if (!name) {
+    return;
+  }
+
+  addFriendCard(name);
+  form.reset();
+  dialog.close();
 });

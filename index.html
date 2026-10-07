@@ -192,5 +192,26 @@
 </div>
  </main>
 </div>
+<dialog id="add-friend-dialog" class="modal">
+  <form id="add-friend-form">
+    <div class="modal-header">
+      <div>
+        <h2 class="modal-title">Add a friend</h2>
+        <p class="modal-subtitle">Type their Last.fm username</p>
+      </div>
+      <button type="button" class="modal-close" id="close-dialog-btn" aria-label="Close">✕</button>
+    </div>
+
+    <label class="input-wrap">
+      <span class="input-at">@</span>
+      <input type="text" id="friend-name-input" placeholder="username" autocomplete="off" required>
+    </label>
+
+    <div class="modal-actions">
+      <button type="button" class="button-secondary" id="cancel-dialog-btn">Cancel</button>
+      <button type="submit" class="button-primary">Add friend</button>
+    </div>
+  </form>
+</dialog>
 </body>
 </html>
