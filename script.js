@@ -12,6 +12,7 @@ const friendCount = document.querySelector("#friend-count");
 function addFriendCard(name) {
   const card = document.createElement("article");
   card.className = "card";
+    card.dataset.username = name;
 
   card.innerHTML = `
     <div class="card-header">
@@ -115,12 +116,45 @@ async function showNowPlaying(card, username) {
   `;
 
   const isPlaying = track["@attr"]?.nowplaying === "true";
+  const badge = card.querySelector(".badge");
 
   if (isPlaying) {
-    const badge = card.querySelector(".badge");
     badge.textContent = "Active";
     badge.classList.remove("inactive");
+  } else {
+    badge.textContent = timeAgo(track.date.uts);
+    badge.classList.add("inactive");
   }
 
   updateFriendCount();
 }
+function timeAgo(timestamp) {
+  const seconds = Math.floor(Date.now() / 1000) - Number(timestamp);
+  const minutes = Math.floor(seconds / 60);
+
+  if (minutes < 1) {
+    return "Last active just now";
+  }
+
+  if (minutes < 60) {
+    return `Last active ${minutes} min ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return `Last active ${hours} hr ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  return `Last active ${days} days ago`;
+}
+function refreshAllFriends() {
+  const cards = feed.querySelectorAll(".card");
+
+  cards.forEach(function (card) {
+    showNowPlaying(card, card.dataset.username);
+  });
+}
+
+setInterval(refreshAllFriends, 30000);
