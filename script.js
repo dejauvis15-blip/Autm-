@@ -1,6 +1,7 @@
 const addFriendButton = document.querySelector("#add-friend-btn");
 
 const friends = JSON.parse(localStorage.getItem("friends")) || [];
+const MY_USERNAME = "Jauvisss";
 const feed = document.querySelector(".feed");
 const dialog = document.querySelector("#add-friend-dialog");
 const form = document.querySelector("#add-friend-form");
@@ -9,6 +10,10 @@ const closeButton = document.querySelector("#close-dialog-btn");
 const cancelButton = document.querySelector("#cancel-dialog-btn");
 const friendCount = document.querySelector("#friend-count");
 const recentList = document.querySelector(".recent-list");
+const weekPlays = document.querySelector("#week-plays");
+const topArtist = document.querySelector("#top-artist");
+const topTrack = document.querySelector("#top-track");
+const topAlbum = document.querySelector("#top-album");
 
 function addFriendCard(name) {
   const card = document.createElement("article");
@@ -40,6 +45,7 @@ function addFriendCard(name) {
   });
   feed.appendChild(card);
   showNowPlaying(card, name);
+    showAvatar(card.querySelector(".avatar"), name);
 }
 
 function saveFriends() {
@@ -89,6 +95,24 @@ function updateFriendCount() {
 }
 
 
+async function callLastfm(params) {
+  const url = `https://ws.audioscrobbler.com/2.0/?${params}&api_key=${LASTFM_API_KEY}&format=json`;
+  const response = await fetch(url);
+  return await response.json();
+}
+async function showAvatar(avatar, username) {
+  const data = await callLastfm(`method=user.getinfo&user=${username}`);
+
+  if (data.error) {
+    return;
+  }
+
+  const picture = data.user.image[2]["#text"];
+
+  if (picture) {
+    avatar.innerHTML = `<img src="${picture}" alt="">`;
+  }
+}
 async function getRecentTracks(username) {
   const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=5`;
 
@@ -208,3 +232,19 @@ async function showRecentlyPlayed() {
   });
 }
 showRecentlyPlayed();
+showAvatar(document.querySelector("#my-avatar"), MY_USERNAME);
+async function showMyWeek() {
+  const weekAgo = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60;
+
+  const recent = await callLastfm(`method=user.getrecenttracks&user=${MY_USERNAME}&from=${weekAgo}&limit=1`);
+  const artists = await callLastfm(`method=user.gettopartists&user=${MY_USERNAME}&period=7day&limit=1`);
+  const tracks = await callLastfm(`method=user.gettoptracks&user=${MY_USERNAME}&period=7day&limit=1`);
+  const albums = await callLastfm(`method=user.gettopalbums&user=${MY_USERNAME}&period=7day&limit=1`);
+
+  weekPlays.textContent = Number(recent.recenttracks["@attr"].total).toLocaleString();
+  topArtist.textContent = artists.topartists.artist[0]?.name || "–";
+  topTrack.textContent = tracks.toptracks.track[0]?.name || "–";
+  topAlbum.textContent = albums.topalbums.album[0]?.name || "–";
+}
+
+showMyWeek();
