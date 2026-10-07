@@ -19,3 +19,10 @@ async function showAvatar(avatar, username) {
     avatar.innerHTML = `<img src="${picture}" alt="">`;
   }
 }
+function realImage(url) {
+  if (!url || url.includes("2a96cbd8b46e442fc41c2b86b821562f")) {
+    return "";
+  }
+
+  return url;
+}

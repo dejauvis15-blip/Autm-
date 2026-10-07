@@ -33,14 +33,14 @@ async function getTrackImage(track) {
   const name = encodeURIComponent(track.name);
   const data = await callLastfm(`method=track.getinfo&artist=${artist}&track=${name}`);
 
-  return data.track?.album?.image[2]["#text"] || "";
+  return realImage(data.track?.album?.image[2]["#text"]);
 }
 
 async function getArtistImage(artist) {
   const name = encodeURIComponent(artist.name);
   const data = await callLastfm(`method=artist.gettopalbums&artist=${name}&limit=1`);
 
-  return data.topalbums?.album[0]?.image[2]["#text"] || "";
+  return realImage(data.topalbums?.album[0]?.image[2]["#text"]);
 }
 
 
@@ -55,16 +55,17 @@ async function showTopLists(period) {
 
   recent.recenttracks.track.forEach(function (track) {
     const artistName = track.artist["#text"];
-    const image = track.image[2]["#text"];
+        const image = realImage(track.image[2]["#text"]);
 
     if (image && !artFromHistory[artistName]) {
       artFromHistory[artistName] = image;
     }
   });
-
+  console.log("artistImages:", artistImages);
+  console.log("artFromHistory:", artFromHistory);
    renderTopList(topArtistsList, artists.topartists.artist.map(function (artist, index) {
     return { name: artist.name, subtitle: "", plays: artist.playcount,image: artistImages[index] || artFromHistory[artist.name] || ""  };
-  }));: 
+  })); 
 
   renderTopList(topTracksList, tracks.toptracks.track.map(function (track, index) {
     return { name: track.name, subtitle: track.artist.name, plays: track.playcount, image: trackImages[index] };
