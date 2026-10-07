@@ -51,6 +51,31 @@
     <button class="tab" data-period="12month">1 year</button>
   </div>
 </header>
+<div class="overview">
+  <section class="overview-main">
+    <div class="overview-top">
+      <div>
+        <p class="overview-label">Plays this week</p>
+        <p class="overview-number" id="total-plays">–</p>
+      </div>
+      <span class="change-pill" id="change-pill"></span>
+    </div>
+    <div class="chart" id="daily-chart" aria-label="Plays per day, last 7 days"></div>
+  </section>
+
+  <div class="side-tiles">
+    <div class="tile">
+      <p class="tile-label">Daily average</p>
+      <p class="tile-value" id="daily-average">–</p>
+      <p class="tile-note">plays per day</p>
+    </div>
+    <div class="tile">
+      <p class="tile-label">Top artist</p>
+      <p class="tile-value" id="tile-top-artist">–</p>
+      <p class="tile-note" id="tile-top-artist-plays"></p>
+    </div>
+  </div>
+</div>
 
 <div class="top-lists">
   <section class="top-list">
