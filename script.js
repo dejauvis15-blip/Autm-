@@ -8,6 +8,7 @@ const nameInput = document.querySelector("#friend-name-input");
 const closeButton = document.querySelector("#close-dialog-btn");
 const cancelButton = document.querySelector("#cancel-dialog-btn");
 const friendCount = document.querySelector("#friend-count");
+const recentList = document.querySelector(".recent-list");
 
 function addFriendCard(name) {
   const card = document.createElement("article");
@@ -88,18 +89,24 @@ function updateFriendCount() {
 }
 
 
-async function getNowPlaying(username) {
-  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+async function getRecentTracks(username) {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${LASTFM_API_KEY}&format=json&limit=5`;
 
   const response = await fetch(url);
   const data = await response.json();
 
   if (data.error) {
-    return null;
+    return [];
   }
 
-  return data.recenttracks.track[0];
+  return data.recenttracks.track;
 }
+
+async function getNowPlaying(username) {
+  const tracks = await getRecentTracks(username);
+  return tracks[0];
+}
+
 async function showNowPlaying(card, username) {
   const track = await getNowPlaying(username);
 
@@ -122,7 +129,7 @@ async function showNowPlaying(card, username) {
     badge.textContent = "Active";
     badge.classList.remove("inactive");
   } else {
-    badge.textContent = timeAgo(track.date.uts);
+    badge.textContent = "Last active " + timeAgo(track.date.uts);
     badge.classList.add("inactive");
   }
 
@@ -133,21 +140,21 @@ function timeAgo(timestamp) {
   const minutes = Math.floor(seconds / 60);
 
   if (minutes < 1) {
-    return "Last active just now";
+    return "just now";
   }
 
   if (minutes < 60) {
-    return `Last active ${minutes} min ago`;
+    return `${minutes} min ago`;
   }
 
   const hours = Math.floor(minutes / 60);
 
   if (hours < 24) {
-    return `Last active ${hours} hr ago`;
+    return `${hours} hr ago`;
   }
 
   const days = Math.floor(hours / 24);
-  return `Last active ${days} days ago`;
+  return `${days} days ago`;
 }
 function refreshAllFriends() {
   const cards = feed.querySelectorAll(".card");
@@ -155,6 +162,49 @@ function refreshAllFriends() {
   cards.forEach(function (card) {
     showNowPlaying(card, card.dataset.username);
   });
+  showRecentlyPlayed();
 }
 
 setInterval(refreshAllFriends, 30000);
+async function showRecentlyPlayed() {
+  const allPlays = [];
+
+  for (const username of friends) {
+    const tracks = await getRecentTracks(username);
+
+    tracks.forEach(function (track) {
+      if (track.date) {
+        allPlays.push({ username: username, track: track });
+      }
+    });
+  }
+
+  allPlays.sort(function (a, b) {
+    return b.track.date.uts - a.track.date.uts;
+  });
+
+  const latest = allPlays.slice(0, 4);
+
+  recentList.innerHTML = "";
+
+  latest.forEach(function (play) {
+    const row = document.createElement("li");
+    row.className = "recent-row";
+
+    row.innerHTML = `
+      <img src="${play.track.image[2]["#text"]}" alt="${play.track.name} cover art">
+      <div class="recent-text">
+        <p class="recent-song">${play.track.name}</p>
+        <p class="recent-artist">${play.track.artist["#text"]}</p>
+      </div>
+      <div class="recent-friend">
+        <span class="avatar small">${play.username[0].toUpperCase()}</span>
+        <span>${play.username}</span>
+      </div>
+      <span class="recent-time">${timeAgo(play.track.date.uts)}</span>
+    `;
+
+    recentList.appendChild(row);
+  });
+}
+showRecentlyPlayed();
