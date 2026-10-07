@@ -1,0 +1,1 @@
+showAvatar(document.querySelector("#my-avatar"), MY_USERNAME);
