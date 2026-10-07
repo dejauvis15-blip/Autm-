@@ -43,6 +43,7 @@ function addFriendCard(name) {
     friends.splice(index, 1);
     saveFriends();
     card.remove();
+    updateFriendCount();
   });
   feed.appendChild(card);
   showNowPlaying(card, name);
