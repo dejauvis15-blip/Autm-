@@ -29,7 +29,7 @@
       <a href="#" class="nav-link"><span class="nav-icon"></span>About</a>
     </nav>
 
-     <button class="button-primary" id="add-friend-btn">+ Add friend</button> 
+     <button class="button-primary add-friend-trigger">+ Add friend</button>  
 
     <div class="me">
       <span class="avatar large" id="my-avatar">J</span>
@@ -41,9 +41,18 @@
   </aside>
     <main class="main">
      <header class="page-header">
-      <h1>Hey, Jauvis</h1>
-      <p class="subtitle" id="friend-count">2 friends are listening right now</p>
-     </header>
+  <div>
+    <h1>Hey, Jauvis</h1>
+    <p class="subtitle" id="friend-count">2 friends are listening right now</p>
+  </div>
+  <div class="header-actions">
+    <label class="search">
+      <span class="search-icon"></span>
+      <input type="search" id="search-input" placeholder="Search friends" autocomplete="off">
+    </label>
+    <button class="button-primary add-friend-trigger">+ Add friend</button>
+  </div>
+</header>
 
      <div class="section-header">
       <h2>Listening now</h2>
@@ -63,21 +72,21 @@
 <aside class="week">
   <p class="week-label">Your week</p>
   <p class="week-number" id="week-plays">–</p>
-  <p class="week-label">plays in the last 7 days</p>
+<p class="week-label">plays in the last 7 days</p>
   <hr class="divider">
 
   <div class="stat-row">
-  <span>Top artist</span>
-  <strong id="top-artist">–</strong>
-</div>
-<div class="stat-row">
-  <span>Top track</span>
-  <strong id="top-track">–</strong>
-</div>
-<div class="stat-row">
-  <span>Top album</span>
-  <strong id="top-album">–</strong>
-</div>
+    <span>Top artist</span>
+    <strong>SZA</strong>
+  </div>
+  <div class="stat-row">
+    <span>Top track</span>
+    <strong>Saturn</strong>
+  </div>
+  <div class="stat-row">
+    <span>Listening time</span>
+    <strong>21 hr</strong>
+  </div>
 
   <a href="#" class="week-button">See my stats</a>
 </aside>
