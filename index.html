@@ -32,7 +32,7 @@
      <button class="button-primary" id="add-friend-btn">+ Add friend</button> 
 
     <div class="me">
-      <span class="avatar large">J</span>
+      <span class="avatar large" id="my-avatar">J</span>
       <div>
         <p class="me-name">Jauvis</p>
         <p class="me-handle">@jauvis</p>
@@ -62,23 +62,22 @@
 </section>
 <aside class="week">
   <p class="week-label">Your week</p>
-  <p class="week-number">1,284</p>
-  <p class="week-label">plays · +12% vs last week</p>
-
+  <p class="week-number" id="week-plays">–</p>
+  <p class="week-label">plays in the last 7 days</p>
   <hr class="divider">
 
   <div class="stat-row">
-    <span>Top artist</span>
-    <strong>SZA</strong>
-  </div>
-  <div class="stat-row">
-    <span>Top track</span>
-    <strong>Saturn</strong>
-  </div>
-  <div class="stat-row">
-    <span>Listening time</span>
-    <strong>21 hr</strong>
-  </div>
+  <span>Top artist</span>
+  <strong id="top-artist">–</strong>
+</div>
+<div class="stat-row">
+  <span>Top track</span>
+  <strong id="top-track">–</strong>
+</div>
+<div class="stat-row">
+  <span>Top album</span>
+  <strong id="top-album">–</strong>
+</div>
 
   <a href="#" class="week-button">See my stats</a>
 </aside>
