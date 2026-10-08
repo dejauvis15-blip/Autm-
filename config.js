@@ -1,0 +1,1 @@
+const LASTFM_API_KEY = "5e9000592d7b0a9429d48e8c0e0b09ec";
