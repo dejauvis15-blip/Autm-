@@ -92,6 +92,7 @@ h1{
   font-weight: 700;
   font-size: 14px;
   color: var(--mist-300);
+    text-decoration: none;
 }
 
 
@@ -772,4 +773,54 @@ h2 {
 .tile-note {
   font-size: 13px;
   color: var(--mist-300);
+}
+.friend:hover {
+  color: var(--mist-100);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--mist-300);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--mist-100);
+}
+
+.profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 26px 28px;
+  margin-bottom: 24px;
+  border-radius: 32px;
+  background: linear-gradient(170deg, var(--ink-500) 25%, var(--ink-800) 75%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 18px 40px -6px rgba(0, 0, 0, 0.5);
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 3px solid var(--mist-100);
+  font-size: 32px;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-info h1 {
+  font-size: 32px;
+}
+
+a.button-secondary {
+  display: inline-block;
+  text-decoration: none;
 }

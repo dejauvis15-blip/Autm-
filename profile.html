@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile · autm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="config.js" defer></script>
+    <script src="lastfm.js" defer></script>
+    <script src="toplists.js" defer></script>
+    <script src="profile.js" defer></script>
+</head>
+<body>
+  <div class="app">
+
+  <aside class="sidebar">
+    <a href="#" class="logo">
+      <img src="images/logo.svg" alt="" width="26">
+      <span>autm</span>
+    </a>
+
+    <nav class="nav">
+      <a href="index.html" class="nav-link"><span class="nav-icon"></span>Feed</a>
+      <a href="stats.html" class="nav-link"><span class="nav-icon"></span>My Stats</a>      
+      <a href="#" class="nav-link"><span class="nav-icon"></span>Ranks</a>
+      <a href="#" class="nav-link"><span class="nav-icon"></span>Friends</a>
+      <a href="#" class="nav-link"><span class="nav-icon"></span>Settings</a>
+      <a href="#" class="nav-link"><span class="nav-icon"></span>About</a>
+    </nav>
+
+     <a href="index.html" class="button-primary">+ Add friend</a>
+    <div class="me">
+      <span class="avatar large" id="my-avatar">J</span>
+      <div>
+        <p class="me-name">Jauvis</p>
+        <p class="me-handle">@jauvis</p>
+      </div>
+    </div>
+  </aside>
+    <main class="main">
+     <a href="index.html" class="back-link">← Feed</a>
+
+<section class="profile-banner">
+  <span class="avatar profile-avatar" id="profile-avatar"></span>
+  <div class="profile-info">
+    <h1 id="profile-name">Loading…</h1>
+    <p class="subtitle" id="profile-handle"></p>
+  </div>
+  <a class="button-secondary" id="lastfm-link" href="#" target="_blank" rel="noopener">Open on Last.fm</a>
+</section>
+
+<div class="section-header">
+  <h2 id="picks-title">Top picks</h2>
+  <div class="tabs">
+    <button class="tab active" data-period="7day">7 days</button>
+    <button class="tab" data-period="1month">1 month</button>
+    <button class="tab" data-period="12month">1 year</button>
+  </div>
+</div>
+
+<div class="top-lists">
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top artists</h2>
+    </div>
+    <ol class="top-rows" id="top-artists"></ol>
+  </section>
+
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top tracks</h2>
+    </div>
+    <ol class="top-rows" id="top-tracks"></ol>
+  </section>
+
+  <section class="top-list">
+    <div class="section-header">
+      <h2>Top albums</h2>
+    </div>
+    <ol class="top-rows" id="top-albums"></ol>
+  </section>
+</div>
+ </main>
+</div>
+
+</body>
+</html>
