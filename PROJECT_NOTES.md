@@ -93,19 +93,47 @@ switched to this because it's easier to learn on.
   - Search box filters friend cards; two "+ Add friend" buttons share one class
   - Learned: `fetch`, `async`/`await`, JSON, `?.`, `||` fallbacks, `classList`,
     `dataset`, `setInterval`, objects, `for...of`, `sort`, `slice`, `Date.now()`
-- [ ] **Week 4: My Stats page** (`stats.html` + `stats.js`, Figma screen 05)
+- [x] **Week 4: My Stats page** (`stats.html` + `stats.js`, Figma screen 05)
   - [x] 4.1 Page created and linked from the sidebar and "See my stats".
         Shared code lives in `lastfm.js` (`MY_USERNAME`, `callLastfm`, `showAvatar`,
         `realImage`), loaded by both pages before their own script
   - [x] 4.2 Real top 5 artists, tracks and albums; 7 days / 1 month / 1 year tabs work.
         Learned: `.map()`, ternary `? :`, `Promise.all`, `encodeURIComponent`,
         objects as lookup tables, `:first-child`, `text-overflow: ellipsis`
-  - [ ] **4.3 (next):** overview row: total plays, daily plays bar chart, side tiles
+  - [x] 4.3 Overview row: plays this week, % vs last week, daily plays bar chart,
+        daily average and top artist tiles. Learned: `while` loops and paging,
+        `let`, classic `for` loops, dates, `.find()`, spread `...`, CSS `:empty`
+- [x] **Friend profile page** (`profile.html` + `profile.js`, Figma screen 06)
+  - Open with `profile.html?user=USERNAME`; friend names on the Feed link there
+  - Banner with avatar, name, join date, now playing chip, "Open on Last.fm"
+  - Music match card ("Coming later"), Plays · 7 days and Top artist tiles
+  - Top picks reuse the shared `toplists.js` (`showTopLists(username, period)`,
+    `setupTabs(username)`), also used by My Stats
+  - Learned: URL parameters (`URLSearchParams`), turning a fixed value into a
+    parameter, find and replace (Ctrl+H), `target="_blank"` + `rel="noopener"`
+- [ ] **Next, in order:** (A) put the site online with GitHub Pages, (C) polish:
+      sidebar name links to own profile, Recently played names link to profiles,
+      Remove button on profile, (B) Friends page (Figma 07), (D) Week 5: Next.js
 - [ ] Later: artist photos. Last.fm has no artist photos (only a gray star
       placeholder), and no art at all for small artists like Lil Dre6o and Loe Shimmy.
       Spotify's API has them but needs a secret key on a server, so do it in Next.js
       (Week 5+). For now, artists without art show a letter circle.
 - [ ] Ask a few friends to make Last.fm accounts, connect Spotify, and get added
+
+## Shared files (which page loads what)
+
+| File | Holds | Loaded by |
+|---|---|---|
+| `config.js` | `LASTFM_API_KEY` (not on GitHub) | every page, first |
+| `lastfm.js` | `MY_USERNAME`, `callLastfm`, `showAvatar`, `realImage`, `timeAgo` | every page, second |
+| `toplists.js` | top 5 lists, image lookups, tabs | `stats.html`, `profile.html` |
+| `script.js` | Feed only | `index.html` |
+| `stats.js` | My Stats overview | `stats.html` |
+| `profile.js` | Profile banner and tiles | `profile.html` |
+
+**New computer or new Codespace?** `config.js` never goes to GitHub, so make it again
+first: `const LASTFM_API_KEY = "your-key";` (key at last.fm/api/accounts). The friends
+list is saved per browser, so add friends again there too.
 
 ## Lessons from mistakes
 
@@ -123,6 +151,11 @@ switched to this because it's easier to learn on.
   files. A half-moved function left `data is not defined` behind.
 - HTML that JavaScript fills in still needs its container (`<ul class="recent-list">`)
   and its `id`s. `querySelector` returns `null` if the element isn't there.
+- When moving code: copy, paste, save, *then* delete the original, then test. Cutting
+  first lost code twice (it was recovered from GitHub and with Ctrl+Z).
+- Pasting at the end of a file: make sure it lands *after* the last `}`, not inside
+  the last function.
+- The same name can't be declared with `const` twice on one page, even in two files.
 
 ## Learning tips
 
