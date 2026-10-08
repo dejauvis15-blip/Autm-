@@ -24,7 +24,7 @@ function addFriendCard(name) {
   card.innerHTML = `
     <div class="card-header">
       <span class="avatar">${name[0].toUpperCase()}</span>
-      <span class="friend">${name}</span>
+      <a class="friend" href="profile.html?user=${encodeURIComponent(name)}">${name}</a>
       <span class="badge inactive">Not listening</span>
     <button class="remove-btn" aria-label="Remove friend">✕</button>
     </div>
