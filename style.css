@@ -912,3 +912,7 @@ a.button-secondary {
   width: 200px;
   flex-shrink: 0;
 }
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
