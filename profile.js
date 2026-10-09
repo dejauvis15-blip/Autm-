@@ -77,3 +77,21 @@ showTopLists(username, "7day");
 showProfileNowPlaying();
 showProfileWeek();
 setInterval(showProfileNowPlaying, 30000);
+
+const removeButton = document.querySelector("#remove-friend");
+const savedFriends = JSON.parse(localStorage.getItem("friends")) || [];
+
+if (savedFriends.includes(username)) {
+  removeButton.hidden = false;
+}
+
+removeButton.addEventListener("click", function () {
+  if (!confirm(`Remove ${username} from your friends?`)) {
+    return;
+  }
+
+  const index = savedFriends.indexOf(username);
+  savedFriends.splice(index, 1);
+  localStorage.setItem("friends", JSON.stringify(savedFriends));
+  window.location.href = "index.html";
+});
