@@ -24,7 +24,7 @@ function addFriendCard(name) {
   card.innerHTML = `
     <div class="card-header">
       <span class="avatar">${name[0].toUpperCase()}</span>
-      <a class="friend" href="profile.html?user=${encodeURIComponent(name)}">${name}</a>
+      <span class="friend">${name}</span>
       <span class="badge inactive">Not listening</span>
     <button class="remove-btn" aria-label="Remove friend">✕</button>
     </div>
@@ -157,7 +157,27 @@ async function showNowPlaying(card, username) {
 
   updateFriendCount();
 }
+function timeAgo(timestamp) {
+  const seconds = Math.floor(Date.now() / 1000) - Number(timestamp);
+  const minutes = Math.floor(seconds / 60);
 
+  if (minutes < 1) {
+    return "just now";
+  }
+
+  if (minutes < 60) {
+    return `${minutes} min ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return `${hours} hr ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  return `${days} days ago`;
+}
 function refreshAllFriends() {
   const cards = feed.querySelectorAll(".card");
 
@@ -199,10 +219,10 @@ async function showRecentlyPlayed() {
         <p class="recent-song">${play.track.name}</p>
         <p class="recent-artist">${play.track.artist["#text"]}</p>
       </div>
-      <div class="recent-friend">
+      <a class="recent-friend" href="profile.html? user=${encodeURIComponent(play.username)}">
         <span class="avatar small">${play.username[0].toUpperCase()}</span>
         <span>${play.username}</span>
-      </div>
+      </a>
       <span class="recent-time">${timeAgo(play.track.date.uts)}</span>
     `;
 
