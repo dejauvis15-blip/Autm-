@@ -81,8 +81,7 @@ setInterval(showProfileNowPlaying, 30000);
 const removeButton = document.querySelector("#remove-friend");
 const savedFriends = JSON.parse(localStorage.getItem("friends")) || [];
 
-if (savedFriends.includes(username)) {
-  removeButton.hidden = false;
+if (savedFriends.includes(username) && username !== MY_USERNAME) {
 }
 
 removeButton.addEventListener("click", function () {

@@ -99,3 +99,4 @@ showAvatar(document.querySelector("#my-avatar"), MY_USERNAME);
 setupTabs(MY_USERNAME);
 showTopLists(MY_USERNAME, "7day");
 showOverview();
+document.querySelector("#stats-handle").textContent = `@${MY_USERNAME} on Last.fm`;

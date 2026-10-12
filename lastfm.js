@@ -1,4 +1,10 @@
-const MY_USERNAME = "Jauvisss";
+let MY_USERNAME = localStorage.getItem("myUsername");
+
+while (!MY_USERNAME) {
+  MY_USERNAME = prompt("Welcome to autm! What's your Last.fm username?")?.trim();
+}
+
+localStorage.setItem("myUsername", MY_USERNAME);
 
 async function callLastfm(params) {
   const url = `https://ws.audioscrobbler.com/2.0/?${params}&api_key=${LASTFM_API_KEY}&format=json`;
@@ -47,3 +53,18 @@ function timeAgo(timestamp) {
   const days = Math.floor(hours / 24);
   return `${days} days ago`;
 }
+
+async function showMyName() {
+  const data = await callLastfm(`method=user.getinfo&user=${encodeURIComponent(MY_USERNAME)}`);
+  const name = data.user?.realname || MY_USERNAME;
+
+  document.querySelector(".me-name").textContent = name;
+  document.querySelector(".me-handle").textContent = "@" + MY_USERNAME;
+
+  const greeting = document.querySelector("#greeting");
+  if (greeting) {
+    greeting.textContent = `Hey, ${name.split(" ")[0]}`;
+  }
+}
+
+showMyName();
