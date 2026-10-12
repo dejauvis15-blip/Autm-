@@ -24,7 +24,7 @@ function addFriendCard(name) {
   card.innerHTML = `
     <div class="card-header">
       <span class="avatar">${name[0].toUpperCase()}</span>
-      <span class="friend">${name}</span>
+      <a class="friend" href="profile.html?user=${encodeURIComponent(name)}">${name}</a>
       <span class="badge inactive">Not listening</span>
     <button class="remove-btn" aria-label="Remove friend">✕</button>
     </div>
@@ -219,7 +219,7 @@ async function showRecentlyPlayed() {
         <p class="recent-song">${play.track.name}</p>
         <p class="recent-artist">${play.track.artist["#text"]}</p>
       </div>
-      <a class="recent-friend" href="profile.html? user=${encodeURIComponent(play.username)}">
+      <a class="recent-friend" href="profile.html?user=${encodeURIComponent(play.username)}">
         <span class="avatar small">${play.username[0].toUpperCase()}</span>
         <span>${play.username}</span>
       </a>

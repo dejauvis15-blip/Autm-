@@ -82,6 +82,7 @@ const removeButton = document.querySelector("#remove-friend");
 const savedFriends = JSON.parse(localStorage.getItem("friends")) || [];
 
 if (savedFriends.includes(username) && username !== MY_USERNAME) {
+removeButton.hidden = false;
 }
 
 removeButton.addEventListener("click", function () {

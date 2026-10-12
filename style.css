@@ -195,6 +195,7 @@ h2 {
   font-size: 13px;
   font-weight: 600;
   color: var(--mist-300);
+  text-decoration: none; 
 }
 .recent-friend:hover {
   color: var(--mist-100);
@@ -915,4 +916,69 @@ a.button-secondary {
 .profile-actions {
   display: flex;
   gap: 10px;
+}
+
+@media (max-width: 900px) {
+  /* rules here only apply on screens 700px wide or less */
+}
+
+  .app {
+    display: grid:
+    grid-template-columns: 248px minmax(0, 1fr);
+    min-height: 100vh;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  .sidebar {
+    padding: 16px;
+  }
+
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+  }
+
+  .sidebar .button-primary {
+    display: none;
+  }
+
+  .main {
+    padding: 16px 8px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .bottom-row,
+  .top-lists {
+    grid-template-columns: 1fr;
+  }
+
+  .overview,
+  .profile-overview,
+  .profile-banner {
+    flex-direction: column;
+  }
+
+  .side-tiles,
+  .small-tile {
+    width: auto;
+  }
+
+    .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tab {
+    padding: 8px 14px;
+  }
 }
